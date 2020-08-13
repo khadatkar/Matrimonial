@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GYMONEDBMVC_newModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="GYMONEDBMVC_newModelStoreContainer">
+    <EntitySet Name="tblCity" EntityType="GYMONEDBMVC_newModel.Store.tblCity" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tblCountry" EntityType="GYMONEDBMVC_newModel.Store.tblCountry" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tblState" EntityType="GYMONEDBMVC_newModel.Store.tblState" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_tblCity_tblCountry" Association="GYMONEDBMVC_newModel.Store.FK_tblCity_tblCountry">
+      <End Role="tblCountry" EntitySet="tblCountry" />
+      <End Role="tblCity" EntitySet="tblCity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblCity_tblState" Association="GYMONEDBMVC_newModel.Store.FK_tblCity_tblState">
+      <End Role="tblState" EntitySet="tblState" />
+      <End Role="tblCity" EntitySet="tblCity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblState_tblCountry" Association="GYMONEDBMVC_newModel.Store.FK_tblState_tblCountry">
+      <End Role="tblCountry" EntitySet="tblCountry" />
+      <End Role="tblState" EntitySet="tblState" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="tblCity">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="CityName" Type="nvarchar" MaxLength="150" />
+    <Property Name="StateId" Type="int" />
+    <Property Name="CountryId" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblCountry">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Country" Type="nvarchar" MaxLength="150" />
+    <Property Name="CreatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblState">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="State" Type="nvarchar" MaxLength="150" />
+    <Property Name="CountryId" Type="int" />
+    <Property Name="CreateDate" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_tblCity_tblCountry">
+    <End Role="tblCountry" Type="GYMONEDBMVC_newModel.Store.tblCountry" Multiplicity="0..1" />
+    <End Role="tblCity" Type="GYMONEDBMVC_newModel.Store.tblCity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCountry">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblCity">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblCity_tblState">
+    <End Role="tblState" Type="GYMONEDBMVC_newModel.Store.tblState" Multiplicity="0..1" />
+    <End Role="tblCity" Type="GYMONEDBMVC_newModel.Store.tblCity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblState">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblCity">
+        <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblState_tblCountry">
+    <End Role="tblCountry" Type="GYMONEDBMVC_newModel.Store.tblCountry" Multiplicity="0..1" />
+    <End Role="tblState" Type="GYMONEDBMVC_newModel.Store.tblState" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCountry">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblState">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

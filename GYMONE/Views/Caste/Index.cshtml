@@ -1,0 +1,81 @@
+﻿@model IEnumerable<GYMONE.Models.CasteDTO>
+@using GridMvc.Html
+@{
+    ViewBag.Title = "Index";
+}
+
+<link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" />
+<link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")"></script>
+<script src="@Url.Content("~/Scripts/gridmvc.min.js")"></script>
+<link href="~/Content/Site.css" rel="stylesheet" />
+
+<script type="text/javascript">
+
+    function deleteCon() {
+        var retVal = confirm("Do you want to continue ?");
+        if (retVal == true) {
+            alert("User wants to continue!");
+            return true;
+        } else {
+            alert("User does not want to continue!");
+            return false;
+        }
+    }
+</script>
+
+<div class="container">
+
+    
+
+    <div class="clearfix"></div>
+
+
+
+    <div style="margin-top: 30px"></div>
+    <fieldset>
+        <legend class="legend">Caste Details</legend>
+
+
+        <div class="panel">
+
+            <div class="panel-body">
+
+
+                <div>
+                    @Html.ActionLink("Add Caste", "Create" ,"Caste",new { @class = "btn btn-info btn-pressure"})
+                </div>
+                <div style="margin-top: 5px"></div>
+                @Html.Grid(Model).Columns(columns =>
+                    {
+
+                        columns.Add(c => c.Id).Titled("Id").Filterable(true).Encoded(false)
+        .Sanitized(false).SetWidth(50);
+
+                        
+                        columns.Add(c => c.Caste).Titled("Caste").Filterable(true).Encoded(false)
+      .Sanitized(false).SetWidth(50);
+
+                        columns.Add(c => c.Religion).Titled("Religion").Filterable(true).Encoded(false)
+      .Sanitized(false).SetWidth(50);
+                        
+                        columns.Add()
+        .Encoded(false)
+        .Sanitized(false)
+        .SetWidth(20)
+        .RenderValueAs(o => Html.ActionLink("Edit", "Edit", new { id = o.Id })).Titled("Edit");
+                        columns.Add()
+   .Encoded(false)
+   .Sanitized(false)
+   .SetWidth(30)
+   .RenderValueAs(o => Html.ActionLink("Delete", "Delete", new { id = o.Id },
+       new { onclick = "return confirm('Are you sure you wish to delete this Caste ?');" })).Titled("Delete");
+
+                    }).WithPaging(10).Sortable(true)
+
+            </div>
+        </div>
+
+    </fieldset>
+</div>
+

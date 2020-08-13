@@ -1,0 +1,45 @@
+﻿@model IEnumerable<GYMONE.Models.ViewModels.MemberRegistrationVM>
+
+@{
+    ViewBag.Title = ViewBag.MemberReligion;
+    Layout = "~/Views/Shared/_CMSLayout.cshtml";
+}
+
+
+<select id="SelectCategory" name="SelectCategory">
+    <option value="0">All</option>
+    @*@foreach (var item in ViewBag.Categories)
+    {
+        if (ViewBag.SelectedCat == item.Value)
+        {
+            <option selected="selected" value="@item.Value">@item.Text</option>
+        }
+        else
+        {
+            <option value="@item.Value">@item.Text</option>
+        }
+    }*@
+
+    <option value="1">Male</option>
+    <option value="2">Female</option>
+</select>
+
+
+
+<h4>Religion : @ViewBag.MemberReligion</h4>
+
+
+
+@foreach (var item in Model)
+{
+    <a href="/shop/product-details/@item.MemID">
+        <img src="/Images/Uploads/Members/@item.MemID/Thumbs/@item.MemImagename" />
+    </a>
+    <h4>
+       
+            @Html.DisplayFor(modelItem => item.MemberFName)&nbsp;
+    @Html.DisplayFor(modelItem => item.MemberMName)&nbsp;
+    @Html.DisplayFor(modelItem => item.MemberLName)
+        
+    </h4>
+}

@@ -1,0 +1,73 @@
+﻿@model IEnumerable<GYMONE.Models.ViewModels.ReligionVM>
+
+<script src="~/Scripts/jquery-1.9.1.js"></script>
+<script src="~/Scripts/jquery.min.js"></script>
+
+@*<script type="text/javascript">
+    $(document).ready(function () {
+
+
+        $("#religionid").change(function () {
+            
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("MemberData","RegisterMember")',
+                data: {id : $("#religionid").val() },
+                success: function (response) {
+                    window.open("/RegisterMember/MemberData/" + $("#religionid").val(), "_self");
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+            return false;
+        })
+
+
+    });
+
+</script>*@
+
+@*<h3>Religions</h3>
+
+
+
+@Html.DropDownList(
+    "religionid", 
+    new SelectList(
+        Model.Select(x => new { Value = x.Id, Text = x.Religion }),
+        "Value",
+        "Text"
+    ),"Select Religion"
+)*@
+
+@if (Request.IsAuthenticated && User.IsInRole("User"))
+{
+    @Html.ActionLink("Edit Profile", "EditMemberProfile", "CMSDemo")
+}
+<hr />
+<a href="/CMSDemo/MemberByReligion">Search By Religion</a>
+@*@Html.ActionLink("Search By Religion","MemberByReligion","CMSDemo")*@
+<hr />
+@Html.ActionLink("Search By Member ID", "MemberByID", "CMSDemo")
+<hr />
+@Html.ActionLink("Search By Name", "MemberByName", "CMSDemo")
+@*<hr />
+@Html.ActionLink("Search By Gender", "MemberByGender", "CMSDemo")*@
+
+
+
+@*@Html.DropDownList("religionid",new SelectList(Model.Select(x => x.Religion)))*@
+
+
+@*<ul>
+    @foreach (var item in Model)
+    {
+        <li><a href="/RegisterMember/MemberData/@item.Id">@item.Religion</a></li>
+    }
+</ul>*@
+
+
+
+
+

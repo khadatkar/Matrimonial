@@ -1,0 +1,19 @@
+﻿@{
+    var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
+
+    string layout = "";
+    if (controller == "Admin")
+    {
+        layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else if (controller == "CMSDemo")
+    {
+        layout = "~/Views/Shared/_CMSLayout.cshtml";
+    }
+    else
+    {
+        layout = "~/Views/Shared/_MainLayout.cshtml";
+    }
+
+    Layout = layout;
+}

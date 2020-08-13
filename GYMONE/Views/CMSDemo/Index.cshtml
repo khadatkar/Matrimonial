@@ -1,0 +1,286 @@
+﻿@model IEnumerable<GYMONE.Models.ViewModels.MemberRegistrationVM>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_CMSLayout.cshtml";
+}
+
+<style>
+    .pk {
+        /*color:goldenrod;*/
+        font-weight:bold;
+        font-family:Calibri;
+    }
+</style>
+
+@using PagedList.Mvc; 
+@using PagedList;
+
+<div class="panel">
+    <div class="panel-body">
+            <div class="row">
+
+                @foreach (var item in ViewBag.OnePageOfMembers)
+                {
+                    <div class="col-md-4" style="padding-bottom: 10px;margin-bottom:5px;">
+                        <a href="/CMSDemo/MemberDetails?ID=@item.MemID">
+                            <img src="/Images/Uploads/Members/@item.MemID/Thumbs/@item.MemImagename"  width="150px" height="150px"/>
+                            View Details 
+                            &nbsp;
+                             @* @Html.DisplayFor(modelItem => item.MemberMName)&nbsp;
+                             @Html.DisplayFor(modelItem => item.MemberLName)*@
+                        </a>
+                        <br />
+                        <h3>@item.MemberFName&nbsp;@item.MemberMName&nbsp;@item.MemberLName </h3>
+                        <table>
+                            @*<tr>
+                                <td class="pk">@item.MemberFName</td>
+                                <td class="pk">@item.MemberMName</td>
+                                <td class="pk">@item.MemberLName</td>
+                            </tr>*@
+                            <tr>
+                                <td class="pk">Member ID</td>
+                                <td>:</td>
+                                <td>@item.MainMemberID</td>
+                            </tr>
+                            <tr>
+                                <td class="pk">Age</td>
+                                <td>:</td>
+                                <td>@item.Age</td>
+                            </tr>
+                            <tr>
+                                <td class="pk">Caste</td>
+                                <td>:</td>
+                                <td>@item.caste</td>
+                            </tr>
+                            <tr>
+                                <td class="pk">Religion</td>
+                                <td>:</td>
+                                <td>@item.religion</td>
+                            </tr>
+                            <tr>
+                                <td class="pk">City</td>
+                                <td>:</td>
+                                <td>@item.City</td>
+                            </tr>
+                        </table>
+                    </div>
+    
+                }
+
+            </div>
+            @Html.PagedListPager((IPagedList)ViewBag.OnePageOfMembers, page => Url.Action("Index", new { page, genderid = ViewBag.Selectedgender }))
+    </div>
+</div>
+
+
+@section Scripts {
+    @*<script src="http://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>*@
+
+
+    @*<script type="text/javascript">
+        $(document).ready(function () {
+
+
+            $("#SelectCountry").change(function () {
+                $("#SelectState").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetState")',
+                dataType: 'json',
+                data: { CountryId: $("#SelectCountry").val() },
+                success: function (statedata) {
+
+                    $("#SelectState").append('<option value="' + "0" + '">' + "Select State" + '</option>');
+
+                    $.each(statedata, function (i, state) {
+                        $("#SelectState").append('<option value="' + state.Id + '">' + state.state + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+            return false;
+        })
+
+
+    });
+
+</script>*@
+
+
+    @*<script type="text/javascript">
+        $(document).ready(function () {
+
+
+            $("#SelectReligion").change(function () {
+                $("#SelectCaste").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetCaste")',
+                dataType: 'json',
+                data: { ReligionId: $("#SelectReligion").val() },
+                success: function (castedata) {
+
+                    $("#SelectCaste").append('<option value="' + "0" + '">' + "Select Caste" + '</option>');
+
+                    $.each(castedata, function (i, caste) {
+                        $("#SelectCaste").append('<option value="' + caste.Id + '">' + caste.Caste + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+            return false;
+        })
+
+
+    });
+
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+            $("#SelectCaste").change(function () {
+                $("#SelectSubCaste").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetSubCaste")',
+                dataType: 'json',
+                data: { CasteId: $("#SelectCaste").val() },
+                success: function (SubCastedata) {
+
+                    $("#SelectSubCaste").append('<option value="' + "0" + '">' + "Select Caste" + '</option>');
+
+                    $.each(SubCastedata, function (i, subcaste) {
+                        $("#SelectSubCaste").append('<option value="' + subcaste.Id + '">' + subcaste.SubCaste + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+            return false;
+        })
+
+
+    });
+
+    </script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+            $("#SelectState").change(function () {
+                $("#SelectCity").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetCity")',
+                dataType: 'json',
+                data: { stateid: $("#SelectState").val() },
+                success: function (citydata) {
+
+                    $("#SelectCity").append('<option value="' + "0" + '">' + "Select City" + '</option>');
+
+                    $.each(citydata, function (i, city) {
+                        alert(city);
+                        //$("#SelectCity").append('<option value="' + city.Id + '">' + city.city + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+            return false;
+        })
+
+
+    });
+
+    </script>*@
+
+
+
+    <script>
+
+        $(function () {
+
+            /*
+            * Select Members from specified Gender
+            */
+
+            $("#SelectGender").on("change", function () {
+                var url = $(this).val();
+
+                if (url) {
+                    window.location = "/CMSDemo/Index?genderid=" + url;
+                }
+
+                return false;
+            });
+
+            //////////////////////////////////////////////////////////////
+
+            //$("#SelectState").on("change", function () {
+            //    var url = $(this).val();
+
+            //    if (url) {
+            //        window.location = "/CMSDemo/Index?stateid=" + url;
+            //    }
+
+            //    return false;
+            //});
+
+
+            ////////////////////////////////////////////////////////////////
+            //$("#SelectCity").on("change", function () {
+            //    var url = $(this).val();
+
+            //    if (url) {
+            //        window.location = "/CMSDemo/Index?cityid=" + url;
+            //    }
+
+            //    return false;
+            //});
+            ////////////////////////////////////////////////////////////////
+            //$("#SelectReligion").on("change", function () {
+            //    var url = $(this).val();
+
+            //    if (url) {
+            //        window.location = "/CMSDemo/Index?religionid=" + url;
+            //    }
+
+            //    return false;
+            //});
+            ////////////////////////////////////////////////////////////////
+            //$("#SelectCaste").on("change", function () {
+            //    var url = $(this).val();
+
+            //    if (url) {
+            //        window.location = "/CMSDemo/Index?casteid=" + url;
+            //    }
+
+            //    return false;
+            //});
+            ////////////////////////////////////////////////////////////////
+            //$("#SelectSubCaste").on("change", function () {
+            //    var url = $(this).val();
+
+            //    if (url) {
+            //        window.location = "/CMSDemo/Index?subcasteid=" + url;
+            //    }
+
+            //    return false;
+            //});
+            //////////////////////////////////////////////////////////////
+
+        });
+
+    </script>
+
+}

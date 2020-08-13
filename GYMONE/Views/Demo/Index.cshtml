@@ -1,0 +1,109 @@
+﻿@model IEnumerable<GYMONE.Models.MemberRegistrationDTO>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_TemplateLayout.cshtml";
+}
+
+<div id="about" class="about-box">
+    <div class="about-a1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="title-box">
+                        <h2>PRANAY <span>& </span>PRANJALI </h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="row align-items-center about-main-info">
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="about-m">
+                                <div class="about-img">
+                                    <img class="img-fluid" src="~/Templates/images/pr2.jpg" alt="" />
+                                </div>
+                                @*<ul>
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                </ul>*@
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-6 col-sm-12">
+                            <h2><i class="fa fa-heart-o" aria-hidden="true"></i><span>Pranjali Pothare</span> <i class="fa fa-heart-o" aria-hidden="true"></i></h2>
+                            @*<p>Fusce convallis ante id purus sagittis malesuada. Sed erat ipsum, suscipit sit amet auctor quis, vehicula ut leo. Maecenas felis nulla, tincidunt ac blandit a, consectetur quis elit. Nulla ut magna eu purus cursus sagittis. Praesent fermentum tincidunt varius. Proin sit amet tempus magna. Fusce pellentesque vulputate urna. </p>*@
+                        </div>
+                    </div>
+                    <div class="row align-items-center about-main-info">
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="about-m">
+                                <div class="about-img">
+                                    <img class="img-fluid" src="~/Templates/images/pk2.jpg" alt="" />
+                                </div>
+                                @*<ul>
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                </ul>*@
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-6 col-sm-12">
+                            <h2><i class="fa fa-heart-o" aria-hidden="true"></i><span>Pranay Khadatkar </span><i class="fa fa-heart-o" aria-hidden="true"></i></h2>
+                            @*<p>Fusce convallis ante id purus sagittis malesuada. Sed erat ipsum, suscipit sit amet auctor quis, vehicula ut leo. Maecenas felis nulla, tincidunt ac blandit a, consectetur quis elit. Nulla ut magna eu purus cursus sagittis. Praesent fermentum tincidunt varius. Proin sit amet tempus magna. Fusce pellentesque vulputate urna. </p>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Start Gallery -->
+<div id="gallery" class="gallery-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="title-box">
+                    <h2>Recently Join</h2>
+                    @*<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>*@
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <ul class="popup-gallery clearfix">
+                
+                @foreach (var member in ViewBag.listmember)
+                {
+                    <li>
+
+                        <a href="/Images/Uploads/Members/@member.MemID/Gallery/@member.MemImagename">
+                            <img class="img-thumbnail" src="/Images/Uploads/Members/@member.MemID/Gallery/@member.MemImagename" alt="Member Photo" style="width:250px;height:250px"/>
+                            @*<span class="overlay"><i class="fa fa-heart-o" aria-hidden="true"></i></span>*@
+                        </a>
+                        @member.MemberFName<br />
+                        Age : @member.Age<br />
+                        City : @member.City<br />
+                        State : @member.State<br />
+
+                        @if (member.Qualification != null)
+                        {
+                            <p>Qualification : @member.Qualification</p>
+                        }
+                        
+                        @if (member.otherqualification != null)
+                        {
+                            <p>Job : @member.otherqualification</p>
+                        }
+
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- End Gallery -->
+
+
+

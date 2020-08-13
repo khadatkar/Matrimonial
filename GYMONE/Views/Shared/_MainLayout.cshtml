@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    @*<link href="~/Images/shlogo.png" rel="shortcut icon" type="image/x-icon" />*@
+    <meta name="viewport" content="width=device-width" />
+
+
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    
+    @*<header>
+
+        <div class="col-md-12 col-sm-12">
+            <section id="login">
+                @Html.Partial("_LoginPartial")
+            </section>
+        </div>
+
+    </header>*@
+    <div id="body">
+
+        @if (Request.IsAuthenticated &&  User.IsInRole("Admin"))
+        {
+            <a href="~/Dashboard/AdminDashboard" class="btn btn-success" style="margin:25px;text-decoration:none;">Admin Dashboard</a>
+        }
+        @if(Request.IsAuthenticated)
+        {
+            <a href="~/CMSDemo/Index" class="btn btn-success" style="margin:25px;text-decoration:none;">Dashboard</a>
+        }
+
+        @RenderSection("featured", required: false)
+        <section class="">
+            @RenderBody()
+        </section>
+    </div>
+    <footer>
+        <div class="container">
+            <div class="text-center footer">
+                Developed By <a href="khadatkarpranay47@gmail.com">Pranay Khadatkar</a>
+            </div>
+        </div>
+    </footer>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jqueryui")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

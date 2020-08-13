@@ -1,0 +1,89 @@
+﻿@model IEnumerable<GYMONE.Models.ViewModels.MemberRegistrationVM>
+@{
+    ViewBag.Title = "Member By ID";
+    Layout = "~/Views/Shared/_CMSLayout.cshtml";
+}
+@using PagedList.Mvc;
+@using PagedList;
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#txtmemberid").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Payment/GetDatabyMemberNo",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.MemberNo, value: item.MainMemberID };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    })
+</script>
+
+
+<h2>Member By ID</h2>
+<div class="panel">
+    <div class="panel-body">
+        <div class="row">
+
+            <div class="col-md-4">
+                @Html.TextBox("txtmemberid")
+            </div>
+            <div class="col-md-2">
+                <input type="submit" id="search"/>
+            </div>
+
+        </div>
+        <div style="margin-top: 5px"></div>
+
+        <hr />
+
+        <div class="row">
+
+            @foreach (var item in ViewBag.OnePageOfMembers)
+            {
+                <div class="col-md-4" style="padding-bottom: 5px">
+                    <a href="/CMSDemo/MemberDetails?ID=@item.MemID">
+                        <img src="/Images/Uploads/Members/@item.MemID/Thumbs/@item.MemImagename"  width="150px" height="150px"/>
+                        @item.MemberFName &nbsp;
+                             @* @Html.DisplayFor(modelItem => item.MemberMName)&nbsp;
+                             @Html.DisplayFor(modelItem => item.MemberLName)*@
+                    </a>
+                </div>
+    
+            }
+
+        </div>
+        @Html.PagedListPager((IPagedList)ViewBag.OnePageOfMembers, page => Url.Action("MemberByReligion", new { page, memberid = ViewBag.selectedmemberid }))
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        /*
+            * Select Members from specified Religion
+            */
+
+        $("#search").click(function () {
+            var ipvalue = $("#txtmemberid").val();
+            if (ipvalue) {
+                //window.location = "/CMSDemo/MemberByReligion?religionid=" + url;
+                window.location = "/CMSDemo/MemberByID?memberid=" + ipvalue;
+            }
+
+            return false;
+        });
+    </script>
+}

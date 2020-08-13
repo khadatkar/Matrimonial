@@ -1,0 +1,108 @@
+﻿@model IEnumerable<GYMONE.Models.ViewModels.MessageVM>
+
+@using PagedList.Mvc; 
+@using PagedList;
+
+@{
+    ViewBag.Title = "Messages";
+}
+
+<h2>Messages</h2>
+
+<select id="SelectReceiver" name="SelectReceiver">
+    <option value="0">All</option>
+    @foreach (var item in ViewBag.Receivers)
+    {
+        if (ViewBag.SelectedReceiver == item.Value)
+        {
+            <option selected="selected" value="@item.Value">@item.Value - @item.Text</option>
+        }
+        else
+        {
+            <option value="@item.Value">@item.Value - @item.Text</option>
+        }
+    }
+</select>
+<br /><br />
+
+
+<table class="table">
+    <tr>
+        <th>
+            Date
+        </th>
+        <th>
+            Sender
+        </th>
+        <th>
+            Receiver
+        </th>
+        <th>
+            Message
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var Message in ViewBag.OnePageOfMessages)
+    {
+        <tr>
+            <td>
+                @Message.date
+            </td>
+            <td>
+                @Message.sendername
+            </td>
+            <td>
+                @Message.receivername
+            </td>
+            <td>
+                @Message.message
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "DeleteMessage", new { id = Message.Id }, new { @class = "delete" } )
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Html.PagedListPager((IPagedList)ViewBag.OnePageOfMessages, page => Url.Action("Messages", new { page, receiverId = ViewBag.SelectedReceiver }))
+
+@section Scripts {
+<script src="http://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+<script>
+
+$(function () {
+
+    /*
+    * Select products from specified category
+    */
+
+    $("#SelectReceiver").on("change", function () {
+        var url = $(this).val();
+
+        if (url) {
+            window.location = "/CMSDemo/Messages?receiverId=" + url;
+        }
+
+        return false;
+    });
+
+    //////////////////////////////////////////////////////////////
+
+    /*
+    * Confirm product deletion
+    */
+
+    $("a.delete").click(function () {
+        if (!confirm("Confirm product deletion")) return false;
+    });
+
+    //////////////////////////////////////////////////////////////
+
+});
+
+</script>
+
+}
+

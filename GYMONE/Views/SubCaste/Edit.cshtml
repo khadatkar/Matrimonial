@@ -1,0 +1,134 @@
+﻿@model GYMONE.Models.SubCasteDTO
+
+@{
+    ViewBag.Title = "Edit Sub Caste";
+}
+
+@if (TempData["notice"] != null)
+{<div class="alert alert-success" style="float: none;" role="alert">
+    <b>@TempData["notice"]</b>
+    </div>
+
+}
+
+
+<script src="~/Scripts/jquery-1.9.1.js"></script>
+<script src="~/Scripts/jquery.min.js"></script>
+<link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<script src="~/bootstrap/js/bootstrap.min.js"></script>
+<link href="~/Content/Site.css" rel="stylesheet" />
+
+
+<script type="text/javascript">
+    $.noConflict();
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+
+        $("#ReligionId").change(function () {
+            $("#CasteId").empty();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetCaste")',
+                dataType: 'json',
+                data: { ReligionId: $("#ReligionId").val() },
+                success: function (castedata) {
+
+                    $("#CasteId").append('<option value="' + "0" + '">' + "Select Caste" + '</option>');
+
+                    $.each(castedata, function (i, caste) {
+                        $("#CasteId").append('<option value="' + caste.Id + '">' + caste.Caste + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+            return false;
+        })
+
+
+    });
+
+</script>
+
+
+
+<div class="container">
+
+    <div class="logo col-sm-12 text-center col-md-12 ">
+        <img alt="" src="~/Images/shlogo.png" />
+    </div>
+
+    <div class="clearfix"></div>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+         @Html.AntiForgeryToken()
+        <fieldset>
+            <legend class="legend">Edit Sub Caste</legend>
+
+            <div class="panel">
+
+                <div class="panel-body">
+
+                     <div>
+                    @Html.ActionLink("Sub Caste List", "Index", "SubCaste", new { @class = "btn btn-info btn-pressure" })
+                </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.ReligionId)
+                        </div>
+                        <div class="col-md-3">
+                            @Html.DropDownListFor(m => m.ReligionId, new SelectList(Model.ListReligion, "Id", "Religion"), new { @class = "form-control" })
+                            @Html.ValidationMessage("ReligionMessage")
+                        </div>
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.CasteId)
+                        </div>
+                        <div class="col-md-3">
+                            @Html.DropDownListFor(m => m.CasteId, new SelectList(Model.ListCaste, "Id", "Caste"), new { @class = "form-control" })
+                            @Html.ValidationMessage("CasteMessage")
+                        </div>
+                    </div>
+                    <div style="margin-top: 5px"></div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            @Html.HiddenFor(model => model.Id)
+                            @Html.LabelFor(model => model.SubCaste)
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.SubCaste, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.SubCaste)
+                        </div>
+                    </div>
+
+
+                    <div style="margin-top: 5px"></div>
+                   
+
+                    <div style="margin-top: 5px"></div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="submit" class="btn btn-success" name="actionType" value="Update" />
+                              @Html.ActionLink("Cancel", "Index", "SubCaste", new  {  @class="btn btn-success"})
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </fieldset>
+    }
+
+   
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>

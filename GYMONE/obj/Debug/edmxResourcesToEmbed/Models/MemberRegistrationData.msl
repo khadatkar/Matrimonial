@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MemberRegistrationModel1StoreContainer" CdmEntityContainer="MemberRegistrationEntities">
+    <EntitySetMapping Name="MemberRegistration1">
+      <EntityTypeMapping TypeName="MemberRegistrationModel1.MemberRegistration1">
+        <MappingFragment StoreEntitySet="MemberRegistration">
+          <ScalarProperty Name="MemID" ColumnName="MemID" />
+          <ScalarProperty Name="MemberNo" ColumnName="MemberNo" />
+          <ScalarProperty Name="MemberFName" ColumnName="MemberFName" />
+          <ScalarProperty Name="MemberLName" ColumnName="MemberLName" />
+          <ScalarProperty Name="MemberMName" ColumnName="MemberMName" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Contactno" ColumnName="Contactno" />
+          <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="PlantypeID" ColumnName="PlantypeID" />
+          <ScalarProperty Name="WorkouttypeID" ColumnName="WorkouttypeID" />
+          <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="MemImagename" ColumnName="MemImagename" />
+          <ScalarProperty Name="MemImagePath" ColumnName="MemImagePath" />
+          <ScalarProperty Name="JoiningDate" ColumnName="JoiningDate" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="MainMemberID" ColumnName="MainMemberID" />
+          <ScalarProperty Name="countryid" ColumnName="countryid" />
+          <ScalarProperty Name="stateid" ColumnName="stateid" />
+          <ScalarProperty Name="cityid" ColumnName="cityid" />
+          <ScalarProperty Name="religionid" ColumnName="religionid" />
+          <ScalarProperty Name="casteid" ColumnName="casteid" />
+          <ScalarProperty Name="subcasteid" ColumnName="subcasteid" />
+          <ScalarProperty Name="forgenderid" ColumnName="forgenderid" />
+          <ScalarProperty Name="profilecreatedby" ColumnName="profilecreatedby" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="Feet" ColumnName="Feet" />
+          <ScalarProperty Name="Inches" ColumnName="Inches" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="marritalmemberstatus" ColumnName="marritalmemberstatus" />
+          <ScalarProperty Name="formaritalmemberstatus" ColumnName="formaritalmemberstatus" />
+          <ScalarProperty Name="AnyDisability" ColumnName="AnyDisability" />
+          <ScalarProperty Name="fatherstatus" ColumnName="fatherstatus" />
+          <ScalarProperty Name="mothername" ColumnName="mothername" />
+          <ScalarProperty Name="motherstatus" ColumnName="motherstatus" />
+          <ScalarProperty Name="noofbrothers" ColumnName="noofbrothers" />
+          <ScalarProperty Name="noofsisters" ColumnName="noofsisters" />
+          <ScalarProperty Name="marriedbrother" ColumnName="marriedbrother" />
+          <ScalarProperty Name="marriedsisters" ColumnName="marriedsisters" />
+          <ScalarProperty Name="highestqualification" ColumnName="highestqualification" />
+          <ScalarProperty Name="otherqualification" ColumnName="otherqualification" />
+          <ScalarProperty Name="diet" ColumnName="diet" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PlanMaster1">
+      <EntityTypeMapping TypeName="MemberRegistrationModel1.PlanMaster1">
+        <MappingFragment StoreEntitySet="PlanMaster">
+          <ScalarProperty Name="PlanID" ColumnName="PlanID" />
+          <ScalarProperty Name="PlanName" ColumnName="PlanName" />
+          <ScalarProperty Name="PlanAmount" ColumnName="PlanAmount" />
+          <ScalarProperty Name="ServicetaxAmout" ColumnName="ServicetaxAmout" />
+          <ScalarProperty Name="ServiceTax" ColumnName="ServiceTax" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateUserID" ColumnName="CreateUserID" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyUserID" ColumnName="ModifyUserID" />
+          <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
+          <ScalarProperty Name="SchemeID" ColumnName="SchemeID" />
+          <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
+          <ScalarProperty Name="TotalAmout" ColumnName="TotalAmout" />
+          <ScalarProperty Name="ServicetaxNo" ColumnName="ServicetaxNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCaste1">
+      <EntityTypeMapping TypeName="MemberRegistrationModel1.tblCaste1">
+        <MappingFragment StoreEntitySet="tblCaste">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Caste" ColumnName="Caste" />
+          <ScalarProperty Name="ReligionId" ColumnName="ReligionId" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCity1">
+      <EntityTypeMapping TypeName="MemberRegistrationModel1.tblCity1">
+        <MappingFragment StoreEntitySet="tblCity">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="StateId" ColumnName="StateId" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblState1">
+      <EntityTypeMapping TypeName="MemberRegistrationModel1.tblState1">
+        <MappingFragment StoreEntitySet="tblState">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,192 @@
+﻿@model GYMONE.Models.ViewModels.MemberRegistrationVM
+
+
+@{
+    ViewBag.Title = "MemberDetails";
+    Layout = "~/Views/Shared/_CMSLayout.cshtml";
+}
+
+<style>
+    .pk {
+        padding: 3px;
+        font-size: medium;
+    }
+</style>
+
+<h3>@Html.DisplayFor(model => model.MemberFName) @Html.DisplayFor(model => model.MemberMName) @Html.DisplayFor(model => model.MemberLName)</h3>
+
+<div class="row">
+    <div class="col-xs-12 col-md-4">
+        <img src="/Images/Uploads/Members/@Model.MemID/Thumbs/@Model.MemImagename" />
+    </div>
+    <div class="col-xs-12 col-md-4">
+        <b></b>
+        <br />
+        <div class="pk">
+            <b>Joining Date : </b>
+            @Html.DisplayFor(model => model.JoiningDate)
+        </div>
+        <br />
+        @if (Request.IsAuthenticated)
+        {
+            <hr />
+            <h4 style="background-color: black; color: white;">Personal Details</h4>
+
+            <div class="pk">
+                <b>Contact No :</b> @Html.DisplayFor(model => model.Contactno)
+            </div>
+            
+            <div class="pk">
+                <b>DOB :</b> @Html.DisplayFor(model => model.DOB)
+            </div>
+            
+            <div class="pk">
+                <b>Age :</b> @Html.DisplayFor(model => model.Age)
+            </div>
+            
+            <div class="pk">
+                <b>Height :</b> @Html.DisplayFor(model => model.Feet) Feet&nbsp
+                @Html.DisplayFor(model => model.Inches) Inche
+            </div>
+            
+            <div class="pk">
+                <b>Weight :</b> @Html.DisplayFor(model => model.Weight) Kg.
+            </div>
+            
+            <div class="pk">
+                <b>Color :</b> @Html.DisplayFor(model => model.color)
+            </div>
+    
+            <div class="pk">
+                <b>Address :</b> @Html.DisplayFor(model => model.Address)
+            </div>
+            
+            <div class="pk">
+                <b>State :</b> @ViewBag.State
+            </div>
+            <div class="pk">
+                <b>City :</b> @ViewBag.city
+            </div>
+            <div class="pk">
+                <b>Religion :</b> @ViewBag.religion
+            </div>
+            <div class="pk">
+                <b>Caste :</b> @ViewBag.caste
+            </div>
+            <div class="pk">
+                <b>SubCaste :</b> @ViewBag.subcaste
+            </div>
+            <div class="pk">
+                <b>Marital Status :</b> @Html.DisplayFor(model => model.marritalmemberstatus)
+            </div>
+            <div class="pk">
+                <b>Disability :</b> @Html.DisplayFor(model => model.AnyDisability)
+            </div>
+            <hr />
+            <h4 style="background-color: black; color: white;">Family Details</h4>
+            <div class="pk">
+                <b>Father Status :</b> @Html.DisplayFor(model => model.fatherstatus)
+            </div>
+            <div class="pk">
+                <b>Mother Name :</b> @Html.DisplayFor(model => model.mothername)
+            </div>
+            <div class="pk">
+                <b>Mother Status :</b> @Html.DisplayFor(model => model.motherstatus)
+            </div>
+            <div class="pk">
+                <b>No. Of Brothers :</b> @Html.DisplayFor(model => model.noofbrothers) &nbsp
+                Of Married : @Html.DisplayFor(model => model.marriedbrother)
+            </div>
+            <div class="pk">
+                <b>No. Of Sisters :</b> @Html.DisplayFor(model => model.noofsisters) &nbsp
+                Of Married : @Html.DisplayFor(model => model.marriedsisters)
+            </div>
+            <hr />
+            <h4 style="background-color: black; color: white;">Qualification Details</h4>
+            <div class="pk">
+                <b>Qualification :</b> @ViewBag.Qualification &nbsp &nbsp
+                @Html.DisplayFor(model => model.otherqualification)
+
+            </div>
+            <div class="pk">
+                <b>Diet :</b> @Html.DisplayFor(model => model.diet)
+            </div>
+ 
+        }
+    </div>
+</div>
+<hr />
+<h3>Send Message</h3>
+<div class="row">
+    <div class="col-xs-12 col-md-12">
+        @Html.TextArea("txtMessage", new { @cols = "50", @rows = "8", @style = "width:100%;" })
+    </div>
+</div>
+<div style="padding-top: 5px;"></div>
+<div class="row">
+    <div class="col-xs-12 col-md-4">
+        <a href="#" class="sendmsg btn btn-primary pull-right">Send Message</a>
+        @*<input type="submit" id="btnsendmsg" class="btn btn-success" />*@
+    </div>
+
+</div>
+
+<div class="row">
+
+    <h3>Member Gallery</h3>
+
+    <div class="col-xs-12 fancyboxdiv">
+        <br />
+        <br />
+        @foreach (var image in Model.GalleryImages)
+        {
+            <div style="display: inline-block">
+                <a class="fancybox" rel="gallery1" href="/Images/Uploads/Members/@Model.MemID/Gallery/@image">
+                    <img src="/Images/Uploads/Members/@Model.MemID/Gallery/Thumbs/@image" />
+                </a>
+            </div>
+        }
+    </div>
+
+</div>
+
+<link href="~/Content/jquery.fancybox.css" rel="stylesheet" />
+
+@section Scripts {
+
+    <script src="~/Scripts/jquery.fancybox.js"></script>
+
+    <script>
+        $(function () {
+
+            /*
+            * Fancybox
+            */
+
+            $(".fancybox").fancybox();
+
+            ////////////////////////////////////////////////////////
+
+            $("a.sendmsg").click(function (e) {
+                e.preventDefault();
+
+                var $this = $(this);
+                var msgdata = $('#txtMessage').val();
+
+                //var url = "/cart/PlaceOrder";
+
+                var url = "/CMSDemo/SendMessage?receiverid=" + @Model.MemID.ToString() +"&msg=" + msgdata;
+
+                $.post(url, {}, function (data) {
+                    
+                    alert("Message Send Successfully");
+                });
+                location.reload();
+            });
+
+            ////////////////////////////////////////////////////////
+
+        });
+    </script>
+
+}

@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MemberRegistrationModel1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="MemberRegistrationModel1StoreContainer">
+    <EntitySet Name="MemberRegistration" EntityType="MemberRegistrationModel1.Store.MemberRegistration" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PlanMaster" EntityType="MemberRegistrationModel1.Store.PlanMaster" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tblCaste" EntityType="MemberRegistrationModel1.Store.tblCaste" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tblCity" EntityType="MemberRegistrationModel1.Store.tblCity" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tblState" EntityType="MemberRegistrationModel1.Store.tblState" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_MemberRegistration_PlanMaster" Association="MemberRegistrationModel1.Store.FK_MemberRegistration_PlanMaster">
+      <End Role="PlanMaster" EntitySet="PlanMaster" />
+      <End Role="MemberRegistration" EntitySet="MemberRegistration" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MemberRegistration_tblCaste" Association="MemberRegistrationModel1.Store.FK_MemberRegistration_tblCaste">
+      <End Role="tblCaste" EntitySet="tblCaste" />
+      <End Role="MemberRegistration" EntitySet="MemberRegistration" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MemberRegistration_tblCity" Association="MemberRegistrationModel1.Store.FK_MemberRegistration_tblCity">
+      <End Role="tblCity" EntitySet="tblCity" />
+      <End Role="MemberRegistration" EntitySet="MemberRegistration" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MemberRegistration_tblState" Association="MemberRegistrationModel1.Store.FK_MemberRegistration_tblState">
+      <End Role="tblState" EntitySet="tblState" />
+      <End Role="MemberRegistration" EntitySet="MemberRegistration" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblCity_tblState" Association="MemberRegistrationModel1.Store.FK_tblCity_tblState">
+      <End Role="tblState" EntitySet="tblState" />
+      <End Role="tblCity" EntitySet="tblCity" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="MemberRegistration">
+    <Key>
+      <PropertyRef Name="MemID" />
+    </Key>
+    <Property Name="MemID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="MemberNo" Type="nvarchar" MaxLength="20" />
+    <Property Name="MemberFName" Type="nvarchar" MaxLength="100" />
+    <Property Name="MemberLName" Type="nvarchar" MaxLength="100" />
+    <Property Name="MemberMName" Type="nvarchar" MaxLength="100" />
+    <Property Name="DOB" Type="datetime" />
+    <Property Name="Age" Type="nvarchar" MaxLength="10" />
+    <Property Name="Contactno" Type="nvarchar" MaxLength="10" />
+    <Property Name="EmailID" Type="nvarchar" MaxLength="30" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="30" />
+    <Property Name="PlantypeID" Type="int" />
+    <Property Name="WorkouttypeID" Type="int" />
+    <Property Name="Createdby" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="MemImagename" Type="nvarchar" MaxLength="500" />
+    <Property Name="MemImagePath" Type="nvarchar" MaxLength="500" />
+    <Property Name="JoiningDate" Type="datetime" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" />
+    <Property Name="MainMemberID" Type="bigint" />
+    <Property Name="countryid" Type="int" />
+    <Property Name="stateid" Type="int" />
+    <Property Name="cityid" Type="int" />
+    <Property Name="religionid" Type="int" />
+    <Property Name="casteid" Type="int" />
+    <Property Name="subcasteid" Type="int" />
+    <Property Name="forgenderid" Type="int" />
+    <Property Name="profilecreatedby" Type="varchar" MaxLength="150" />
+    <Property Name="userid" Type="int" />
+    <Property Name="Feet" Type="int" />
+    <Property Name="Inches" Type="int" />
+    <Property Name="Color" Type="nvarchar" MaxLength="250" />
+    <Property Name="Weight" Type="bigint" />
+    <Property Name="marritalmemberstatus" Type="nvarchar" MaxLength="150" />
+    <Property Name="formaritalmemberstatus" Type="nvarchar" MaxLength="150" />
+    <Property Name="AnyDisability" Type="nvarchar" MaxLength="550" />
+    <Property Name="fatherstatus" Type="nvarchar" MaxLength="550" />
+    <Property Name="mothername" Type="nvarchar" MaxLength="550" />
+    <Property Name="motherstatus" Type="nvarchar" MaxLength="550" />
+    <Property Name="noofbrothers" Type="nvarchar" MaxLength="50" />
+    <Property Name="noofsisters" Type="nvarchar" MaxLength="50" />
+    <Property Name="marriedbrother" Type="nvarchar" MaxLength="50" />
+    <Property Name="marriedsisters" Type="nvarchar" MaxLength="50" />
+    <Property Name="highestqualification" Type="int" />
+    <Property Name="otherqualification" Type="nvarchar" MaxLength="550" />
+    <Property Name="diet" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="PlanMaster">
+    <Key>
+      <PropertyRef Name="PlanID" />
+    </Key>
+    <Property Name="PlanID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="PlanName" Type="varchar" MaxLength="50" />
+    <Property Name="PlanAmount" Type="decimal" />
+    <Property Name="ServicetaxAmout" Type="decimal" />
+    <Property Name="ServiceTax" Type="varchar" MaxLength="50" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateUserID" Type="int" />
+    <Property Name="ModifyDate" Type="datetime" />
+    <Property Name="ModifyUserID" Type="int" />
+    <Property Name="RecStatus" Type="char" MaxLength="1" />
+    <Property Name="SchemeID" Type="int" />
+    <Property Name="PeriodID" Type="int" />
+    <Property Name="TotalAmout" Type="decimal" />
+    <Property Name="ServicetaxNo" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblCaste">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Caste" Type="nvarchar" MaxLength="150" />
+    <Property Name="ReligionId" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblCity">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CityName" Type="nvarchar" MaxLength="150" />
+    <Property Name="StateId" Type="int" />
+    <Property Name="CountryId" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblState">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="State" Type="nvarchar" MaxLength="150" />
+    <Property Name="CountryId" Type="int" />
+    <Property Name="CreateDate" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_MemberRegistration_PlanMaster">
+    <End Role="PlanMaster" Type="MemberRegistrationModel1.Store.PlanMaster" Multiplicity="0..1" />
+    <End Role="MemberRegistration" Type="MemberRegistrationModel1.Store.MemberRegistration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PlanMaster">
+        <PropertyRef Name="PlanID" />
+      </Principal>
+      <Dependent Role="MemberRegistration">
+        <PropertyRef Name="PlantypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MemberRegistration_tblCaste">
+    <End Role="tblCaste" Type="MemberRegistrationModel1.Store.tblCaste" Multiplicity="0..1" />
+    <End Role="MemberRegistration" Type="MemberRegistrationModel1.Store.MemberRegistration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCaste">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MemberRegistration">
+        <PropertyRef Name="casteid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MemberRegistration_tblCity">
+    <End Role="tblCity" Type="MemberRegistrationModel1.Store.tblCity" Multiplicity="0..1" />
+    <End Role="MemberRegistration" Type="MemberRegistrationModel1.Store.MemberRegistration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCity">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MemberRegistration">
+        <PropertyRef Name="cityid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MemberRegistration_tblState">
+    <End Role="tblState" Type="MemberRegistrationModel1.Store.tblState" Multiplicity="0..1" />
+    <End Role="MemberRegistration" Type="MemberRegistrationModel1.Store.MemberRegistration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblState">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MemberRegistration">
+        <PropertyRef Name="stateid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblCity_tblState">
+    <End Role="tblState" Type="MemberRegistrationModel1.Store.tblState" Multiplicity="0..1" />
+    <End Role="tblCity" Type="MemberRegistrationModel1.Store.tblCity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblState">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblCity">
+        <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

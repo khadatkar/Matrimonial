@@ -1,0 +1,303 @@
+﻿@model IEnumerable<GYMONE.Models.ViewModels.MemberRegistrationVM>
+
+@{
+    ViewBag.Title = "test";
+}
+
+<h2>test</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table style="border:solid;border-bottom-color:black;font-family:Arial;">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AnyDisability)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fatherstatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mothername)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.motherstatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.noofbrothers)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.noofsisters)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.marriedbrother)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.marriedsisters)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.highestqualification)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.otherqualification)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.diet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Inches)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.color)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Weight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.marritalmemberstatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.formaritalmemberstatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MemID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MemberNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.countryid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.stateid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cityid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.religionid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.casteid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.subcasteid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MemberFName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MemberLName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MemberMName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Contactno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PlantypeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkouttypeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Createdby)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MemImagename)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MemImagePath)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JoiningDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MainMemberID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.forgenderid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.userid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaymentID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AnyDisability)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fatherstatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mothername)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.motherstatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.noofbrothers)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.noofsisters)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.marriedbrother)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.marriedsisters)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.highestqualification)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.otherqualification)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.diet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Inches)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.color)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Weight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.marritalmemberstatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.formaritalmemberstatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MemID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MemberNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.countryid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.state)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cityid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.religionid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.casteid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.subcasteid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MemberFName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MemberLName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MemberMName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DOB)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Age)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Contactno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PlantypeID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkouttypeID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Createdby)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MemImagename)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MemImagePath)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JoiningDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MainMemberID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.forgenderid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.userid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaymentID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

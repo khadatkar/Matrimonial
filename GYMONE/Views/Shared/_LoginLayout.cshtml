@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    @*<link href="~/Images/dotnetsaifavicon.ico" rel="shortcut icon" type="image/x-icon" />*@
+    @*<link href="~/Images/shlogo.png" rel="shortcut icon" type="image/x-icon" />*@
+    <meta name="viewport" content="width=device-width" />
+    @*<link href="~/Content/Site.css" rel="stylesheet" />*@
+    @Scripts.Render("~/bundles/scripts")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    
+    @*<header>
+
+        <div class="col-md-12 col-sm-12">
+            <section id="login">
+            </section>
+        </div>
+
+    </header>*@
+    <div id="body">
+        <div class="container">
+            @RenderSection("featured", required: false)
+            <section class="">
+                @RenderBody()
+            </section>
+        </div>
+    </div>
+    <footer>
+        <div class="container">
+            <div class="text-center footer">
+                Developed By <a href="mailto:khadatkarpranay47@gmail.com">Pranay Khadatkar</a>
+            </div>
+        </div>
+    </footer>
+
+    
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

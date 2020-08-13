@@ -1,0 +1,131 @@
+﻿@model GYMONE.Models.CityMasterDTO
+
+@{
+    ViewBag.Title = "Add City";
+}
+
+
+
+<script src="~/Scripts/jquery-1.9.1.js"></script>
+<script src="~/Scripts/jquery.min.js"></script>
+<link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<script src="~/bootstrap/js/bootstrap.min.js"></script>
+<link href="~/Content/Site.css" rel="stylesheet" />
+
+
+<script type="text/javascript">
+    $.noConflict();
+</script>
+
+@if (TempData["notice"] != null)
+{<div class="alert alert-success" style="float: none;" role="alert">
+    <b>@TempData["notice"]</b>
+    </div>
+
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+
+        $("#CountryId").change(function () {
+            $("#StateId").empty();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetState")',
+                dataType: 'json',
+                data: { CountryId: $("#CountryId").val() },
+                success: function (statedata) {
+
+                    $("#StateId").append('<option value="' + "0" + '">' + "Select State" + '</option>');
+
+                    $.each(statedata, function (i, state) {
+                        $("#StateId").append('<option value="' + state.Id + '">' + state.State + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+            return false;
+        })
+
+
+    });
+
+</script>
+
+
+<div class="container">
+
+    <div class="logo col-sm-12 text-center col-md-12 ">
+        <img alt="" src="~/Images/shlogo.png" />
+    </div>
+
+    <div class="clearfix"></div>
+
+    @using (Html.BeginForm())
+    {    
+        @Html.ValidationSummary(true)
+         @Html.AntiForgeryToken()
+        <fieldset>
+            <legend class="legend">Add City</legend>
+
+            <div class="panel">
+
+                <div class="panel-body">
+
+                     <div>
+                    @Html.ActionLink("City List", "Index", "City", new { @class = "btn btn-info btn-pressure" })
+                </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            @Html.DisplayNameFor(model => model.CountryId)
+                        </div>
+                        <div class="col-md-3">
+                            @Html.DropDownListFor(model => model.CountryId, new SelectList(Model.ListCountry, "Id", "Country"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CountryId)
+                        </div>
+                        <div class="col-md-3">
+                            @Html.DisplayNameFor(model => model.StateId)
+                        </div>
+                        <div class="col-md-3">
+                            @Html.DropDownListFor(model => model.StateId, new SelectList(Model.ListState, "Id", "State"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.StateId)
+                        </div>
+                    </div>
+                    <div style="margin-top: 5px"></div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            @Html.DisplayNameFor(model => model.CityName)
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.CityName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CityName)
+                        </div>
+                    </div>
+                    
+                    
+                    <div style="margin-top: 5px"></div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="submit" class="btn btn-success" value="Create" />
+                            @Html.ActionLink("Cancel", "Index", "City", new  {  @class="btn btn-success"})
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    }
+
+   
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>

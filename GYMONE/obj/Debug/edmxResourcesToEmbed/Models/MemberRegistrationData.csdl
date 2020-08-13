@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MemberRegistrationModel1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="MemberRegistrationEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="MemberRegistration1" EntityType="MemberRegistrationModel1.MemberRegistration1" />
+    <EntitySet Name="PlanMaster1" EntityType="MemberRegistrationModel1.PlanMaster1" />
+    <EntitySet Name="tblCaste1" EntityType="MemberRegistrationModel1.tblCaste1" />
+    <EntitySet Name="tblCity1" EntityType="MemberRegistrationModel1.tblCity1" />
+    <EntitySet Name="tblState1" EntityType="MemberRegistrationModel1.tblState1" />
+    <AssociationSet Name="FK_MemberRegistration_PlanMaster" Association="MemberRegistrationModel1.FK_MemberRegistration_PlanMaster">
+      <End Role="PlanMaster" EntitySet="PlanMaster1" />
+      <End Role="MemberRegistration" EntitySet="MemberRegistration1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MemberRegistration_tblCaste" Association="MemberRegistrationModel1.FK_MemberRegistration_tblCaste">
+      <End Role="tblCaste" EntitySet="tblCaste1" />
+      <End Role="MemberRegistration" EntitySet="MemberRegistration1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MemberRegistration_tblCity" Association="MemberRegistrationModel1.FK_MemberRegistration_tblCity">
+      <End Role="tblCity" EntitySet="tblCity1" />
+      <End Role="MemberRegistration" EntitySet="MemberRegistration1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MemberRegistration_tblState" Association="MemberRegistrationModel1.FK_MemberRegistration_tblState">
+      <End Role="tblState" EntitySet="tblState1" />
+      <End Role="MemberRegistration" EntitySet="MemberRegistration1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblCity_tblState" Association="MemberRegistrationModel1.FK_tblCity_tblState">
+      <End Role="tblState" EntitySet="tblState1" />
+      <End Role="tblCity" EntitySet="tblCity1" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="MemberRegistration1">
+    <Key>
+      <PropertyRef Name="MemID" />
+    </Key>
+    <Property Name="MemID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MemberNo" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="MemberFName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="MemberLName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="MemberMName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="DOB" Type="DateTime" Precision="3" />
+    <Property Name="Age" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="Contactno" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="EmailID" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="Gender" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="PlantypeID" Type="Int32" />
+    <Property Name="WorkouttypeID" Type="Int32" />
+    <Property Name="Createdby" Type="Int64" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int64" />
+    <Property Name="MemImagename" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="MemImagePath" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="JoiningDate" Type="DateTime" Precision="3" />
+    <Property Name="Address" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="MainMemberID" Type="Int64" />
+    <Property Name="countryid" Type="Int32" />
+    <Property Name="stateid" Type="Int32" />
+    <Property Name="cityid" Type="Int32" />
+    <Property Name="religionid" Type="Int32" />
+    <Property Name="casteid" Type="Int32" />
+    <Property Name="subcasteid" Type="Int32" />
+    <Property Name="forgenderid" Type="Int32" />
+    <Property Name="profilecreatedby" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+    <Property Name="userid" Type="Int32" />
+    <Property Name="Feet" Type="Int32" />
+    <Property Name="Inches" Type="Int32" />
+    <Property Name="Color" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+    <Property Name="Weight" Type="Int64" />
+    <Property Name="marritalmemberstatus" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="formaritalmemberstatus" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="AnyDisability" Type="String" MaxLength="550" Unicode="true" FixedLength="false" />
+    <Property Name="fatherstatus" Type="String" MaxLength="550" Unicode="true" FixedLength="false" />
+    <Property Name="mothername" Type="String" MaxLength="550" Unicode="true" FixedLength="false" />
+    <Property Name="motherstatus" Type="String" MaxLength="550" Unicode="true" FixedLength="false" />
+    <Property Name="noofbrothers" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="noofsisters" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="marriedbrother" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="marriedsisters" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="highestqualification" Type="Int32" />
+    <Property Name="otherqualification" Type="String" MaxLength="550" Unicode="true" FixedLength="false" />
+    <Property Name="diet" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="PlanMaster1" Relationship="MemberRegistrationModel1.FK_MemberRegistration_PlanMaster" FromRole="MemberRegistration" ToRole="PlanMaster" />
+    <NavigationProperty Name="tblCaste1" Relationship="MemberRegistrationModel1.FK_MemberRegistration_tblCaste" FromRole="MemberRegistration" ToRole="tblCaste" />
+    <NavigationProperty Name="tblCity1" Relationship="MemberRegistrationModel1.FK_MemberRegistration_tblCity" FromRole="MemberRegistration" ToRole="tblCity" />
+    <NavigationProperty Name="tblState1" Relationship="MemberRegistrationModel1.FK_MemberRegistration_tblState" FromRole="MemberRegistration" ToRole="tblState" />
+  </EntityType>
+  <EntityType Name="PlanMaster1">
+    <Key>
+      <PropertyRef Name="PlanID" />
+    </Key>
+    <Property Name="PlanID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PlanName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="PlanAmount" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="ServicetaxAmout" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="ServiceTax" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateUserID" Type="Int32" />
+    <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifyUserID" Type="Int32" />
+    <Property Name="RecStatus" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="SchemeID" Type="Int32" />
+    <Property Name="PeriodID" Type="Int32" />
+    <Property Name="TotalAmout" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="ServicetaxNo" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="MemberRegistrations1" Relationship="MemberRegistrationModel1.FK_MemberRegistration_PlanMaster" FromRole="PlanMaster" ToRole="MemberRegistration" />
+  </EntityType>
+  <EntityType Name="tblCaste1">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Caste" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="ReligionId" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="MemberRegistrations1" Relationship="MemberRegistrationModel1.FK_MemberRegistration_tblCaste" FromRole="tblCaste" ToRole="MemberRegistration" />
+  </EntityType>
+  <EntityType Name="tblCity1">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CityName" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="StateId" Type="Int32" />
+    <Property Name="CountryId" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="MemberRegistrations1" Relationship="MemberRegistrationModel1.FK_MemberRegistration_tblCity" FromRole="tblCity" ToRole="MemberRegistration" />
+    <NavigationProperty Name="tblState1" Relationship="MemberRegistrationModel1.FK_tblCity_tblState" FromRole="tblCity" ToRole="tblState" />
+  </EntityType>
+  <EntityType Name="tblState1">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="State" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="CountryId" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="MemberRegistrations1" Relationship="MemberRegistrationModel1.FK_MemberRegistration_tblState" FromRole="tblState" ToRole="MemberRegistration" />
+    <NavigationProperty Name="tblCities1" Relationship="MemberRegistrationModel1.FK_tblCity_tblState" FromRole="tblState" ToRole="tblCity" />
+  </EntityType>
+  <Association Name="FK_MemberRegistration_PlanMaster">
+    <End Role="PlanMaster" Type="MemberRegistrationModel1.PlanMaster1" Multiplicity="0..1" />
+    <End Role="MemberRegistration" Type="MemberRegistrationModel1.MemberRegistration1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PlanMaster">
+        <PropertyRef Name="PlanID" />
+      </Principal>
+      <Dependent Role="MemberRegistration">
+        <PropertyRef Name="PlantypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MemberRegistration_tblCaste">
+    <End Role="tblCaste" Type="MemberRegistrationModel1.tblCaste1" Multiplicity="0..1" />
+    <End Role="MemberRegistration" Type="MemberRegistrationModel1.MemberRegistration1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCaste">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MemberRegistration">
+        <PropertyRef Name="casteid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MemberRegistration_tblCity">
+    <End Role="tblCity" Type="MemberRegistrationModel1.tblCity1" Multiplicity="0..1" />
+    <End Role="MemberRegistration" Type="MemberRegistrationModel1.MemberRegistration1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCity">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MemberRegistration">
+        <PropertyRef Name="cityid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MemberRegistration_tblState">
+    <End Role="tblState" Type="MemberRegistrationModel1.tblState1" Multiplicity="0..1" />
+    <End Role="MemberRegistration" Type="MemberRegistrationModel1.MemberRegistration1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblState">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MemberRegistration">
+        <PropertyRef Name="stateid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblCity_tblState">
+    <End Role="tblState" Type="MemberRegistrationModel1.tblState1" Multiplicity="0..1" />
+    <End Role="tblCity" Type="MemberRegistrationModel1.tblCity1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblState">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblCity">
+        <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

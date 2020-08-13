@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GYMONEDBMVC_newModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="CountryEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblCities" EntityType="GYMONEDBMVC_newModel.tblCity" />
+    <EntitySet Name="tblCountries" EntityType="GYMONEDBMVC_newModel.tblCountry" />
+    <EntitySet Name="tblStates" EntityType="GYMONEDBMVC_newModel.tblState" />
+    <AssociationSet Name="FK_tblCity_tblCountry" Association="GYMONEDBMVC_newModel.FK_tblCity_tblCountry">
+      <End Role="tblCountry" EntitySet="tblCountries" />
+      <End Role="tblCity" EntitySet="tblCities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblCity_tblState" Association="GYMONEDBMVC_newModel.FK_tblCity_tblState">
+      <End Role="tblState" EntitySet="tblStates" />
+      <End Role="tblCity" EntitySet="tblCities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblState_tblCountry" Association="GYMONEDBMVC_newModel.FK_tblState_tblCountry">
+      <End Role="tblCountry" EntitySet="tblCountries" />
+      <End Role="tblState" EntitySet="tblStates" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="tblCity">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="CityName" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="StateId" Type="Int32" />
+    <Property Name="CountryId" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblCountry" Relationship="GYMONEDBMVC_newModel.FK_tblCity_tblCountry" FromRole="tblCity" ToRole="tblCountry" />
+    <NavigationProperty Name="tblState" Relationship="GYMONEDBMVC_newModel.FK_tblCity_tblState" FromRole="tblCity" ToRole="tblState" />
+  </EntityType>
+  <EntityType Name="tblCountry">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Country" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblCities" Relationship="GYMONEDBMVC_newModel.FK_tblCity_tblCountry" FromRole="tblCountry" ToRole="tblCity" />
+    <NavigationProperty Name="tblStates" Relationship="GYMONEDBMVC_newModel.FK_tblState_tblCountry" FromRole="tblCountry" ToRole="tblState" />
+  </EntityType>
+  <EntityType Name="tblState">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="State" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="CountryId" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblCities" Relationship="GYMONEDBMVC_newModel.FK_tblCity_tblState" FromRole="tblState" ToRole="tblCity" />
+    <NavigationProperty Name="tblCountry" Relationship="GYMONEDBMVC_newModel.FK_tblState_tblCountry" FromRole="tblState" ToRole="tblCountry" />
+  </EntityType>
+  <Association Name="FK_tblCity_tblCountry">
+    <End Role="tblCountry" Type="GYMONEDBMVC_newModel.tblCountry" Multiplicity="0..1" />
+    <End Role="tblCity" Type="GYMONEDBMVC_newModel.tblCity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCountry">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblCity">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblCity_tblState">
+    <End Role="tblState" Type="GYMONEDBMVC_newModel.tblState" Multiplicity="0..1" />
+    <End Role="tblCity" Type="GYMONEDBMVC_newModel.tblCity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblState">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblCity">
+        <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblState_tblCountry">
+    <End Role="tblCountry" Type="GYMONEDBMVC_newModel.tblCountry" Multiplicity="0..1" />
+    <End Role="tblState" Type="GYMONEDBMVC_newModel.tblState" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCountry">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblState">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

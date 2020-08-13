@@ -1,0 +1,77 @@
+﻿@model IEnumerable<GYMONE.Models.ViewModels.MemberRegistrationVM>
+
+@{
+    ViewBag.Title = "Member By Religion";
+    Layout = "~/Views/Shared/_CMSLayout.cshtml";
+}
+@using PagedList.Mvc;
+@using PagedList;
+<h2>Member By Religion</h2>
+<div class="panel">
+    <div class="panel-body">
+        <div class="row">
+
+            <div class="col-md-4">
+                <select id="SelectReligion" name="SelectReligion" class="form-control">
+                    @foreach (var item in ViewBag.Religion)
+                    {
+                        if (ViewBag.Selectedreligion == item.Value)
+                        {
+                        <option selected="selected" value="@item.Value">@item.Text</option>
+                        }
+                        else
+                        {
+                        <option value="@item.Value">@item.Text</option>
+                        }
+                    }
+                </select>
+                &nbsp;
+            </div>
+
+        </div>
+        <div style="margin-top: 5px"></div>
+
+        <hr />
+
+        <div class="row">
+
+            @foreach (var item in ViewBag.OnePageOfMembers)
+            {
+                <div class="col-md-4" style="padding-bottom: 5px">
+                    <a href="/CMSDemo/MemberDetails?ID=@item.MemID">
+                        <img src="/Images/Uploads/Members/@item.MemID/Thumbs/@item.MemImagename"  width="150px" height="150px"/>
+                        @item.MemberFName &nbsp;
+                             @* @Html.DisplayFor(modelItem => item.MemberMName)&nbsp;
+                             @Html.DisplayFor(modelItem => item.MemberLName)*@
+                    </a>
+                </div>
+    
+            }
+
+        </div>
+        @Html.PagedListPager((IPagedList)ViewBag.OnePageOfMembers, page => Url.Action("MemberByReligion", new { page, religionid = ViewBag.Selectedreligion }))
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        /*
+            * Select Members from specified Religion
+            */
+
+        $("#SelectReligion").on("change", function () {
+            var url = $(this).val();
+
+            if (url) {
+                window.location = "/CMSDemo/MemberByReligion?religionid=" + url;
+            }
+
+            return false;
+        });
+    </script>
+}
+
+
+
+

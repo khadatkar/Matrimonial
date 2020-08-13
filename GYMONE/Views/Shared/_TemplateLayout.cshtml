@@ -1,0 +1,705 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <meta name="keywords" content="shubh mangal">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="~/Templates/images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="~/Templates/images/apple-touch-icon.png">
+
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" href="~/Templates/css/bootstrap.min.css">
+    <!-- Pogo Slider CSS -->
+    <link rel="stylesheet" href="~/Templates/css/pogo-slider.min.css">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="~/Templates/css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="~/Templates/css/responsive.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="~/Templates/css/custom.css">
+
+    @*google map*@
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVSkYQTtYEnlVm03XhiwsVyWjQFitETbU"></script>
+    <script type="text/javascript">
+        var markers = @Html.Raw(ViewBag.Markers);
+        window.onload = function () {
+            var mapOptions = {
+                center: new google.maps.LatLng(markers[0].lat, markers[0].lng),
+                zoom: 17,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var infoWindow = new google.maps.InfoWindow();
+            var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+            for (i = 0; i < markers.length; i++) {
+                var data = markers[i]
+                var myLatlng = new google.maps.LatLng(data.lat, data.lng);
+                var marker = new google.maps.Marker({
+                    position: myLatlng,
+                    map: map,
+                    title: data.title
+                });
+                (function (marker, data) {
+                    google.maps.event.addListener(marker, "click", function (e) {
+                        infoWindow.setContent(data.description);
+                        infoWindow.open(map, marker);
+                    });
+                })(marker, data);
+            }
+        }
+    </script>
+
+    <!-- This css is to ensure that the google map contols (zoom bar etc) show and size correctly. -->
+    <style>
+        #map_canvas img {
+            max-width: none;
+        }
+    </style>
+
+    <!-- This css is to give a nice big popup "info window" when a marker is clicked on the map -->
+    <style>
+        .infoDiv {
+            height: 200px;
+            width: 300px;
+            -webkit-user-select: none;
+            background-color: white;
+        }
+    </style>
+
+    @*<script>
+        $(function () {
+
+           
+           
+
+            $("a.sendmsg").click(function (e) {
+                e.preventDefault();
+
+                var $this = $(this);
+                var msgdata = $('#txtMessage').val();
+
+                //var url = "/cart/PlaceOrder";
+
+                var url = "/CMSDemo/SendMessage?receiverid=" + @Model.MemID.ToString() +"&msg=" + msgdata;
+
+                $.post(url, {}, function (data) {
+                    
+                    alert("Message Send Successfully");
+                });
+                location.reload();
+            });
+
+            ////////////////////////////////////////////////////////
+
+        });
+    </script>*@
+
+
+
+
+
+
+
+
+</head>
+<body id="home" data-spy="scroll" data-target="#navbar-wd" data-offset="98">
+
+    <!-- LOADER -->
+    <div id="preloader">
+        <div class="preloader pulse">
+            <h3>Shubh Mangal Vivah Santha</h3>
+        </div>
+    </div>
+    <!-- end loader -->
+    <!-- END LOADER -->
+    <!-- Start header -->
+    <header class="top-header">
+        <nav class="navbar header-nav navbar-expand-lg" style="background: #890025">
+            <div class="container">
+                @*<a class="navbar-brand" href="index.html"><img src="~/Templates/images/shlogo.png" alt="image"></a>*@
+                <a class="navbar-brand" href="index.html">
+                    <h1 style="font-family: 'Engagement', cursive; font-size: 42px; color: white;">Shubh Mangal Vivah Sanstha</h1>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-wd" aria-controls="navbar-wd" aria-expanded="false" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
+                    <ul class="navbar-nav">
+                        <li><a class="nav-link active" href="#home">Home</a></li>
+                        <li><a class="nav-link" href="#about">About Us</a></li>
+
+                        @if (Request.IsAuthenticated)
+                        {
+                            <li><a class="nav-link" href="/Demo/logout">Logout</a></li>
+                        }
+                        else
+                        {
+                            if (ViewBag.Title == "Login")
+                            {
+                            <li><a class="nav-link" href="/Demo/login">Login</a></li>
+                            }
+                            else
+                            {
+                            <li><a class="nav-link" href="/Demo/login">Login</a></li>
+                            }
+                        }
+
+                        @if (Request.IsAuthenticated)
+                        {
+                            <li><a class="nav-link" href="/CMSDemo/Index">User Dashboard</a></li>
+                            
+@*<li class="active">@Html.Action("User Dashbord", "Index", "CMSDemo")</li>*@
+                        }
+
+                        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li><a class="nav-link" href="/Dashboard/AdminDashboard">Admin Dashboard</a></li>
+                        }
+
+@*<li><a class="nav-link" href="/Demo/Login">Log In</a></li>*@
+@*<li><a class="nav-link" href="#story">Story</a></li>
+                          <li><a class="nav-link" href="#family">Family</a></li>
+                           <li><a class="nav-link" href="#gallery">Gallery</a></li>
+                            <li><a class="nav-link" href="#wedding">Wedding</a></li>
+                            <li><a class="nav-link" href="#events">Events</a></li>
+                            <li><a class="nav-link" href="#contact">Contact</a></li>*@
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- End header -->
+    <!-- Start Banner -->
+    <div class="home-slider">
+        <ul class="rslides">
+            <li>
+                <img src="/Templates/images/wallpaper1.jpg" alt=""></li>
+            <li>
+                <img src="~/images/img1.jpg" alt=""></li>
+            <li>
+                <img src="~/images/img2.jpg" alt=""></li>
+            <li>
+                <img src="~/images/img3.jpg" alt=""></li>
+        </ul>
+        <div class="lbox-details">
+            <h1>Nikhil  & Ashwini</h1>
+            <h2>We're getting married On </h2>
+            <div class="countdown main-time clearfix">
+
+                <div id="timer">
+                    <h3>1 May 2016</h3>
+                    <div id="days"></div>
+                    <div id="hours"></div>
+                    <div id="minutes"></div>
+                    <div id="seconds"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Banner -->
+
+    <div>
+        @RenderBody()
+    </div>
+
+    <!-- Start About us -->
+    <!-- End About us -->
+    <!-- Start Story -->
+    <div id="story" class="story-box main-timeline-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="title-box">
+                        <h2>Our Story</h2>
+                        @*<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>*@
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeLine">
+                <div class="row">
+                    <div class="lineHeader hidden-sm hidden-xs"></div>
+                    <div class="lineFooter hidden-sm hidden-xs"></div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 item">
+                        <div class="caption">
+                            <div class="star center-block">
+                                <span class="h3">01</span>
+                                <span>March </span>
+                                <span>2019</span>
+                            </div>
+                            <div class="image">
+                                <img src="~/Templates/images/time-01.jpg" alt="" />
+                                <div class="title">
+                                    <h2>First Meet <i class="fa fa-angle-right" aria-hidden="true"></i></h2>
+                                </div>
+                            </div>
+                            <div class="textContent">
+                                @*<p class="lead">We met at the wedding of our close friends and immediately found a common language, so a year later our first date happened.</p>*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 item">
+                        <div class="caption">
+                            <div class="star center-block">
+                                <span class="h3">03</span>
+                                <span>April</span>
+                                <span>2019</span>
+                            </div>
+                            <div class="image">
+                                <img src="~/Templates/images/time-02.jpg" alt="" />
+                                <div class="title">
+                                    <h2>First date <i class="fa fa-angle-right" aria-hidden="true"></i></h2>
+                                </div>
+                            </div>
+                            <div class="textContent">
+                                @*<p class="lead">We met at the wedding of our close friends and immediately found a common language, so a year later our first date happened.</p>*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 item">
+                        <div class="caption">
+                            <div class="star center-block">
+                                <span class="h3">03</span>
+                                <span>May</span>
+                                <span>2019</span>
+                            </div>
+                            <div class="image">
+                                <img src="~/Templates/images/time-03.jpg" alt="" />
+                                <div class="title">
+                                    <h2>Proposal <i class="fa fa-angle-right" aria-hidden="true"></i></h2>
+                                </div>
+                            </div>
+                            <div class="textContent">
+                                @*<p class="lead">We met at the wedding of our close friends and immediately found a common language, so a year later our first date happened.</p>*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 item">
+                        <div class="caption">
+                            <div class="star center-block">
+                                <span class="h3">04</span>
+                                <span>June</span>
+                                <span>2019</span>
+                            </div>
+                            <div class="image">
+                                <img src="~/Templates/images/time-04.jpg" alt="" />
+                                <div class="title">
+                                    <h2>Engagement <i class="fa fa-angle-right" aria-hidden="true"></i></h2>
+                                </div>
+                            </div>
+                            <div class="textContent">
+                                @*<p class="lead">For 2 years of work as support engineer responsible about installing and maintenance SWIFT packages for banks. I gain a lot from it before i leave country.</p>*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 item">
+                        <div class="caption">
+                            <div class="star center-block">
+                                <span class="h3">04</span>
+                                <span>July</span>
+                                <span>2019</span>
+                            </div>
+                            <div class="image">
+                                <img src="~/Templates/images/time-05.jpg" alt="" />
+                                <div class="title">
+                                    <h2>My Wedding <i class="fa fa-angle-right" aria-hidden="true"></i></h2>
+                                </div>
+                            </div>
+                            <div class="textContent">
+                                @*<p class="lead">Since then i came to Austria as refugee far from my lovers and friends far a way escaping from wars and threats searching a new life that i didn't find until yet.</p>*@
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- End Story -->
+    <!-- Start Family -->
+    <div id="family" class="family-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="title-box">
+                        <h2>Family</h2>
+                        @*<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>*@
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="single-team-member">
+                        <div class="family-img">
+                            <img class="img-fluid" src="~/Templates/images/family1-01.jpg" alt="" />
+                        </div>
+                        <div class="family-info">
+                            <h4>Mr. Nikhil Gujjar </h4>
+                            @*<p>{ Leida’s Father }</p>*@
+                        </div>
+                    </div>
+                </div>
+                @*<div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="single-team-member">
+                        <div class="family-img">
+                            <img class="img-fluid" src="~/Templates/images/family1-02.jpg" alt="" />
+                        </div>
+                        <div class="family-info">
+                            <h4>Mr. Nikhil Gujjar </h4>
+                            <p>{ Leida’s Mother }</p>
+                        </div>
+                    </div>
+                </div>*@
+                @*<div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="single-team-member">
+                        <div class="family-img">
+                            <img class="img-fluid" src="~/Templates/images/family-03.jpg" alt="" />
+                        </div>
+                        <div class="family-info">
+                            <h4>Mr. Chris Wiles </h4>
+                            <p>{ Leida’s Brother }</p>
+                        </div>
+                    </div>
+                </div>*@
+                @*<div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="single-team-member">
+                        <div class="family-img">
+                            <img class="img-fluid" src="~/Templates/images/family-04.jpg" alt="" />
+                        </div>
+                        <div class="family-info">
+                            <h4>Mr. Adina Wiles </h4>
+                            <p>{ Leida’s Sister }</p>
+                        </div>
+                    </div>
+                </div>*@
+                @*<div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="single-team-member">
+                        <div class="family-img">
+                            <img class="img-fluid" src="~/Templates/images/family-05.jpg" alt="" />
+                        </div>
+                        <div class="family-info">
+                            <h4>Mr. Annetta Wiles </h4>
+                            <p>{ Leida’s Sister }</p>
+                        </div>
+                    </div>
+                </div>*@
+                @*<div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="single-team-member">
+                        <div class="family-img">
+                            <img class="img-fluid" src="~/Templates/images/family-06.jpg" alt="" />
+                        </div>
+                        <div class="family-info">
+                            <h4>Mr. Ladonna Wiles </h4>
+                            <p>{ Leida’s Sister }</p>
+                        </div>
+                    </div>
+                </div>*@
+            </div>
+        </div>
+    </div>
+    <!-- End Family -->
+    @*<!-- Start Gallery -->
+    <div id="gallery" class="gallery-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="title-box">
+                        <h2>Gallery</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <ul class="popup-gallery clearfix">
+                    <li>
+                        <a href="~/Templates/images/gallery-01.jpg">
+                            <img class="img-fluid" src="~/Templates/images/gallery-01.jpg" alt="single image">
+                            <span class="overlay"><i class="fa fa-heart-o" aria-hidden="true"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="~/Templates/images/gallery-02.jpg">
+                            <img class="img-fluid" src="~/Templates/images/gallery-02.jpg" alt="single image">
+                            <span class="overlay"><i class="fa fa-heart-o" aria-hidden="true"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="~/Templates/images/gallery-03.jpg">
+                            <img class="img-fluid" src="~/Templates/images/gallery-03.jpg" alt="single image">
+                            <span class="overlay"><i class="fa fa-heart-o" aria-hidden="true"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="~/Templates/images/gallery-04.jpg">
+                            <img class="img-fluid" src="~/Templates/images/gallery-04.jpg" alt="single image">
+                            <span class="overlay"><i class="fa fa-heart-o" aria-hidden="true"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="~/Templates/images/gallery-05.jpg">
+                            <img class="img-fluid" src="~/Templates/images/gallery-05.jpg" alt="single image">
+                            <span class="overlay"><i class="fa fa-heart-o" aria-hidden="true"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="~/Templates/images/gallery-06.jpg">
+                            <img class="img-fluid" src="~/Templates/images/gallery-06.jpg" alt="single image">
+                            <span class="overlay"><i class="fa fa-heart-o" aria-hidden="true"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="~/Templates/images/gallery-07.jpg">
+                            <img class="img-fluid" src="~/Templates/images/gallery-07.jpg" alt="single image">
+                            <span class="overlay"><i class="fa fa-heart-o" aria-hidden="true"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="~/Templates/images/gallery-08.jpg">
+                            <img class="img-fluid" src="~/Templates/images/gallery-08.jpg" alt="single image">
+                            <span class="overlay"><i class="fa fa-heart-o" aria-hidden="true"></i></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- End Gallery -->*@
+    <!-- Start Wedding -->
+
+    @*<div id="wedding" class="wedding-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="title-box">
+                        <h2>Wedding</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="serviceBox">
+                        <div class="service-icon"><i class="flaticon-bachelorette-party"></i></div>
+                        <h3 class="title">Bachelor Party </h3>
+                        <h4>04 July 2017 at 7:30 pm</h4>
+                        <p class="description">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium consequuntur, deleniti eaque excepturi.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                    <div class="serviceBox">
+                        <div class="service-icon"><i class="flaticon-wedding"></i></div>
+                        <h3 class="title">Wedding Ceremony </h3>
+                        <h4>05 July 2017 at 9:30 pm</h4>
+                        <p class="description">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium consequuntur, deleniti eaque excepturi.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                    <div class="serviceBox">
+                        <div class="service-icon"><i class="flaticon-reception-bell"></i></div>
+                        <h3 class="title">Reception Ceremony </h3>
+                        <h4>06 July 2017 at 10:30 pm</h4>
+                        <p class="description">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium consequuntur, deleniti eaque excepturi.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>*@
+
+
+    <!-- Start Contact -->
+    <div id="contact" class="contact-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="title-box">
+                        <h2>Contact wth us</h2>
+                        <p>Shubh Mangal Vivah Sanstha</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 col-xs-12">
+                    <div class="contact-block">
+                        <form id="contactForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required data-error="Please enter your name">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" placeholder="Your Email" id="email" class="form-control" name="name" required data-error="Please enter your email">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <select class="custom-select d-block form-control" id="guest" required data-error="Please select an item in the list.">
+                                            <option disabled selected>Number Of Guest*</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <select class="custom-select d-block form-control" id="event" required data-error="Please select an item in the list.">
+                                            <option disabled selected>I Am Attending*</option>
+                                            <option value="1">All events</option>
+                                            <option value="2">Wedding ceremony</option>
+                                            <option value="3">Reception party</option>
+                                        </select>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <textarea class="form-control" id="message" placeholder="Your Message" rows="8" data-error="Write your message" required></textarea>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                    <div class="submit-button text-center">
+                                        <a href="#" class="sendmsg btn btn-primary pull-right">Send Message</a>
+                                        @*<button class="btn btn-common" id="submit" type="submit">Send Message</button>*@
+                                        <div id="msgSubmit" class="h3 text-center hidden"></div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Contact -->
+
+
+
+
+
+
+
+    <!-- End Wedding -->
+    <!-- Start Events -->
+    <div id="events" class="events-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="title-box">
+                        <h2>Location</h2>
+                        <!-- This is the div that will contain the Google Map -->
+                        @*<div id="dvMap" style="width: 500px; height: 500px">
+                        </div>*@
+
+                    </div>
+                </div>
+            </div>
+
+
+            @*<div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="event-inner">
+                        <div class="event-img">
+                            <img class="img-fluid" src="~/Templates/images/event-img-01.jpg" alt="" />
+                        </div>
+                        <h2>2 June 2018 Engagement</h2>
+                        <p>Beutiful</p>
+                        <a href="#">See location <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="event-inner">
+                        <div class="event-img">
+                            <img class="img-fluid" src="~/Templates/images/event-img-02.jpg" alt="" />
+                        </div>
+                        <h2>3 June 2018 Main Ceremony </h2>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard </p>
+                        <a href="#">See location <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="event-inner">
+                        <div class="event-img">
+                            <img class="img-fluid" src="~/Templates/images/event-img-03.jpg" alt="" />
+                        </div>
+                        <h2>4 June 2018 Wedding party </h2>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard </p>
+                        <a href="#">See location <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>*@
+        </div>
+    </div>
+    <!-- End Events -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="dvMap" style="width: 100%; height: 500px">
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div style="margin: 15px"></div>
+
+
+
+    <!-- Start Footer -->
+    <footer class="footer-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p class="footer-company-name">All Rights Reserved. &copy; 2020 <a href="#">Shubh Mangal</a> Design By : <a href="khadatkarpranay47@gmail.com">Pranay Khadatkar</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+    <!-- ALL JS FILES -->
+    <!-- ALL JS FILES -->
+    <script src="~/Templates/js/jquery.min.js"></script>
+    <script src="~/Templates/js/popper.min.js"></script>
+    <script src="~/Templates/js/bootstrap.min.js"></script>
+    <!-- ALL PLUGINS -->
+    <script src="~/Templates/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Templates/js/jquery.pogo-slider.min.js"></script>
+    <script src="~/Templates/js/slider-index.js"></script>
+    <script src="~/Templates/js/smoothscroll.js"></script>
+    <script src="~/Templates/js/responsiveslides.min.js"></script>
+    <script src="~/Templates/js/timeLine.min.js"></script>
+    <script src="~/Templates/js/form-validator.min.js"></script>
+    <script src="~/Templates/js/contact-form-script.js"></script>
+    <script src="~/Templates/js/custom.js"></script>
+
+
+</body>
+</html>
+
+
